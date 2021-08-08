@@ -2,10 +2,12 @@
 #include "winmain.h"
 #include "winmsghandler.h"
 #include "windowcreationhandler.h"
+#include "direct3d9main.h"
+
 
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)//win32 main function
 {
-    WNDCLASS wc = { };
+    WNDCLASS wc = {};
 
     wc.lpfnWndProc = WindowProc;
     wc.hInstance = hInst;
@@ -33,7 +35,13 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmd
         return 0;
     }
 
+    d3d9render d3d;
+
+    d3d.CreateD3D(hWnd);
+    d3d.RenderFrame();
+
     MSG msg = { };
+
     while (GetMessage(&msg, NULL, 0, 0) > 0)
     {
         TranslateMessage(&msg);

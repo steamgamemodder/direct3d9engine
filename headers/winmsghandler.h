@@ -1,6 +1,7 @@
 #pragma once
 
 #include <windows.h>
+#include "direct3d9main.h"
 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -10,24 +11,19 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
         DestroyWindow(hWnd);
         break;
 
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        return 0;
-        break;
-
     case WM_PAINT:
     {
-        PAINTSTRUCT ps;
-        HDC hdc = BeginPaint(hWnd, &ps);
-
-        // All painting occurs here, between BeginPaint and EndPaint.
-        FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW + 1));
-        EndPaint(hWnd, &ps);
         break;
     }
 
     default:
         break;
+
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        return 0;
+        break;
     }
+
     return DefWindowProc(hWnd, msg, wParam, lParam);
 }
