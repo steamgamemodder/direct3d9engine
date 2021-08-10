@@ -2,18 +2,30 @@
 #include "winmain.h"
 #include "winmsghandler.h"
 #include "windowcreationhandler.h"
-#include "direct3d9main.h"
 
+UINT windowWidth = 800;
+UINT windowHeight = 600;
 
 int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmdshow)//win32 main function
 {
     WNDCLASS wc = {};
+    LPCWSTR wndClass = L"d3d9app";
 
-    wc.lpfnWndProc = WindowProc;
-    wc.hInstance = hInst;
-    wc.lpszClassName = wndClass;
-    RegisterClass(&wc);
+    wc.lpfnWndProc = WindowProc; //the default message procedure
+    wc.hInstance = hInst; //the handle to the instance
+    wc.lpszClassName = wndClass; //the class name
+    wc.hIcon = nullptr; //the icon
+    RegisterClass(&wc); //register the class
 
+    //define vars for hwnd
+
+    UINT windowX = CW_USEDEFAULT;
+    UINT windowY = CW_USEDEFAULT;
+
+    LPCWSTR wndCaption = L"Direct 3D 9 Application";
+    DWORD wndStyle = WS_OVERLAPPED | WS_CAPTION | WS_VISIBLE | WS_SYSMENU;
+
+    //create the window
     HWND hWnd = CreateWindowEx(
         0,                              // Optional window styles.
         wndClass,                     // Window class
@@ -35,11 +47,6 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmd
         return 0;
     }
 
-    d3d9render d3d;
-
-    d3d.CreateD3D(hWnd);
-    d3d.RenderFrame();
-
     MSG msg = { };
 
     while (GetMessage(&msg, NULL, 0, 0) > 0)
@@ -47,5 +54,5 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmd
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
-    while (1) {};
+    while (1) {}
 }

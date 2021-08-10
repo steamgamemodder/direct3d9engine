@@ -1,12 +1,14 @@
 #pragma once
+#include <intsafe.h>
 
-LPCWSTR wndCaption = L"Direct 3D 9 Application";
-LPCWSTR wndClass = L"d3d9app";
+extern LPCWSTR wndCaption;
 
-const UINT windowWidth = 640;
-const UINT windowHeight = 480;
+extern UINT windowWidth;
+extern UINT windowHeight;
 
-UINT windowX = CW_USEDEFAULT;
-UINT windowY = CW_USEDEFAULT;
+extern UINT windowX;
+extern UINT windowY;
 
-long wndStyle = WS_OVERLAPPED | WS_CAPTION | WS_VISIBLE | WS_SYSMENU;
+extern DWORD wndStyle;
+
+extern HWND hWnd;

@@ -7,12 +7,19 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
-    case WM_CLOSE:
-        DestroyWindow(hWnd);
-        break;
 
     case WM_PAINT:
     {
+        d3d9render d3d;
+
+        d3d.CreateD3D(hWnd);
+        d3d.RenderFrame();
+        break;
+    }
+
+    case WM_CLOSE:
+    {
+        DestroyWindow(hWnd);
         break;
     }
 
