@@ -20,4 +20,6 @@ public:
 	void CloseD3D();
 
 	void RenderFrame(void);
+
+	bool CheckD3DActive();
 };

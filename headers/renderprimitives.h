@@ -20,3 +20,5 @@ struct VERTEX_XYZRHW
 	float rhw;
 	DWORD color_32;
 };
+
+void CreateVertexBufferXYZ(UINT size); //create a vertex buffer with a length using VERTEX_XYZ

@@ -46,6 +46,10 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmd
         MessageBox(hWnd, L"Failed to generate a valid main window.", L"Failure", MB_OK);
         return 0;
     }
+    d3d9render d3d;
+
+    d3d.CreateD3D(hWnd);
+    d3d.RenderFrame();
 
     MSG msg = { };
 
@@ -54,5 +58,6 @@ int APIENTRY WinMain(HINSTANCE hInst, HINSTANCE hInstPrev, PSTR cmdline, int cmd
         TranslateMessage(&msg);
         DispatchMessage(&msg);
     }
-    while (1) {}
+
+    while (!GetMessage(&msg, NULL, 0 ,0) == WM_QUIT) {}
 }

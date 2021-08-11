@@ -18,8 +18,9 @@ void d3d9render::CreateD3D(HWND hWnd) //create the d3d device
 	d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8;
 	d3dpp.BackBufferWidth = windowWidth;
 	d3dpp.BackBufferHeight = windowHeight;
+	//d3dpp.FullScreen_RefreshRateInHz = 60;
 
-	g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_MIXED_VERTEXPROCESSING, &d3dpp, &d3ddev);
+	g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &d3ddev);
 }
 
 void d3d9render::CloseD3D() //destroy the d3d device
@@ -35,4 +36,12 @@ void d3d9render::RenderFrame(void) //render and present the d3d frame
 
 	d3ddev->EndScene();
 	d3ddev->Present(NULL, NULL, NULL, NULL);
+}
+
+bool d3d9render::CheckD3DActive() //check if d3ddev was created
+{
+	if (d3ddev == NULL)
+		return false;
+
+	return true;
 }
